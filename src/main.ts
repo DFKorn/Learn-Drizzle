@@ -23,8 +23,17 @@
 
 // setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
 
+import {db} from './drizzle/db'
+import { usersTable } from './drizzle/schema'
+
+
 async function main(){
-  console.log("Here")
+  await db.insert(usersTable).values({
+    name: "Dmitry"
+  })
+  //console.log("Here")
+  const user = await db.query.usersTable.findFirst()
+  console.log(user)
 }
 
 main()
