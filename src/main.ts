@@ -28,12 +28,13 @@ import { usersTable } from './drizzle/schema'
 
 
 async function main(){
-  await db.insert(usersTable).values({
-    name: "Dmitry"
-  })
-  //console.log("Here")
-  const user = await db.query.usersTable.findFirst()
-  console.log(user)
+  // await db.insert(usersTable).values({
+  //   name: "Dmitry"
+  // })
+  // //console.log("Here")
+  // const user = await db.query.usersTable.findFirst()
+  // console.log(user)
+  await db.delete(usersTable)
 }
 
 main()
