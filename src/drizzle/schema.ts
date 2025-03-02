@@ -49,3 +49,5 @@ export const usersTable = pgTable("users", {
       primaryKey({columns: [table.postId, table.categoryId]})
     ]
   })
+
+

@@ -23,18 +23,54 @@
 
 // setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
 
+import { sql } from 'drizzle-orm'
 import {db} from './drizzle/db'
 import { usersTable } from './drizzle/schema'
 
 
-async function main(){
-  // await db.insert(usersTable).values({
-  //   name: "Dmitry"
-  // })
-  // //console.log("Here")
+// ------ Insert Test ----------
+/* async function main(){
+//   await db.delete(usersTable)
+
+//   const user = await db.insert(usersTable).values([{
+//     name: "Dmitry",
+//     age: 32,
+//     email:'test@testmail.com'
+//   }, {name: 'Sally', age:25, email: 'test@test2.com'}
+// ]).returning({
+//     id: usersTable.id,
+//     userName: usersTable.name
+//   }).onConflictDoUpdate({
+//     target: usersTable.email,
+//     set: {name: 'Updated Name'}
+//   })
+
+//   console.log(user)
+
   // const user = await db.query.usersTable.findFirst()
-  // console.log(user)
-  await db.delete(usersTable)
-}
+  // 
+  //await db.delete(usersTable)
+} */
+
+  // -------- Select Queries test -------------
+  /* async function main(){
+   const users = await db.query.usersTable.findMany({
+      columns: {email: true, name: true},
+      extras: {lowerCaseName: sql<string>`lower(${usersTable.name})`.as('lowerCaseName')}
+    })
+
+    console.log(users)
+  } */
+
+async function main(){
+   const users = await db.query.usersTable.findMany({
+      columns: {email: true, name: true},
+      //offset: 0
+    })
+
+    console.log(users)
+  }
+
+  
 
 main()
