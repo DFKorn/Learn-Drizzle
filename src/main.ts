@@ -25,7 +25,7 @@
 
 import { sql } from 'drizzle-orm'
 import {db} from './drizzle/db'
-import { usersTable } from './drizzle/schema'
+import { UserPreferencesTable, usersTable } from './drizzle/schema'
 
 
 // ------ Insert Test ----------
@@ -63,8 +63,18 @@ import { usersTable } from './drizzle/schema'
   } */
 
 async function main(){
+  // await db.insert(UserPreferencesTable).values({
+  //   emailUpdates: true,
+  //   userId: '67ae394e-0b5f-4622-bac7-295173c09a02'
+  // })
    const users = await db.query.usersTable.findMany({
-      columns: {email: true, name: true},
+      columns: {id: true, name: true},
+      //with: {preferences: true}
+      with: {preferences: {
+        columns: {
+          emailUpdates: true
+        }
+      }}
       //offset: 0
     })
 
