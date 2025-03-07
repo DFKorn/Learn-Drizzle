@@ -52,6 +52,7 @@ import { UserPreferencesTable, usersTable } from './drizzle/schema'
   //await db.delete(usersTable)
 } */
 
+
   // -------- Select Queries test -------------
   /* async function main(){
    const users = await db.query.usersTable.findMany({
@@ -62,6 +63,8 @@ import { UserPreferencesTable, usersTable } from './drizzle/schema'
     console.log(users)
   } */
 
+
+// --------- Query Style Data selection ----------------    
 async function main(){
   // await db.insert(UserPreferencesTable).values({
   //   emailUpdates: true,
@@ -69,7 +72,14 @@ async function main(){
   // })
    const users = await db.query.usersTable.findMany({
       columns: {id: true, name: true},
+
+      // ---- "with" examples -----
       //with: {preferences: true}
+
+      // with: {
+      //   posts: {with: {postCategories: true}}
+      // }
+
       with: {preferences: {
         columns: {
           emailUpdates: true
