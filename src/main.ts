@@ -108,23 +108,23 @@ import { UserPreferencesTable, usersTable } from './drizzle/schema'
 //   }
 
 // --------- SQL Style Data selection ----------------
-async function main(){
+/* async function main(){
   // await db.insert(UserPreferencesTable).values({
   //   emailUpdates: true,
   //   userId: '67ae394e-0b5f-4622-bac7-295173c09a02'
   // })
 
 
-   /* const users = await db
-    .select({
-      id: usersTable.id, 
-      age: usersTable.age,
-      emailUpdates: UserPreferencesTable.emailUpdates
-    })
-    .from(usersTable)
-    .where(eq(usersTable.age, 25))
-    .leftJoin(UserPreferencesTable, eq(UserPreferencesTable.userId, usersTable.id))
- */
+  //  const users = await db
+  //   .select({
+  //     id: usersTable.id, 
+  //     age: usersTable.age,
+  //     emailUpdates: UserPreferencesTable.emailUpdates
+  //   })
+  //   .from(usersTable)
+  //   .where(eq(usersTable.age, 25))
+  //   .leftJoin(UserPreferencesTable, eq(UserPreferencesTable.userId, usersTable.id))
+ 
 
 
     // ---- groupBy selection -----
@@ -140,10 +140,32 @@ async function main(){
 
 
     console.log(users)
+  } */
+
+  //----- Update Test --------
+
+ /*  async function main(){
+    const users = await db
+    .update(usersTable).set({
+      age: 33
+    }).where(eq(usersTable.age, 32))//.returning
+
+    console.log(await db.select().from(usersTable))
+
+  } */
+  
+
+  //----- Update Test --------
+
+  async function main(){
+    const users = await db
+    .delete(usersTable)
+    .where(eq(usersTable.age, 32))//.returning
+
+    console.log(await db.select().from(usersTable))
+
   }
 
 
-
-  
 
 main()
